@@ -1,6 +1,6 @@
 import { gameModes } from "@/_utils/data/gamemodesEnum";
 import Image from "next/image";
-import { RefObject, useRef } from "react";
+import { RefObject } from "react";
 
 interface MenuProps {
   setGameMode: (gameMode: number) => void;
@@ -26,7 +26,7 @@ export default function Menu({
         <div className="flex justify-center items-center gap-4">
           <div className="flex flex-col gap-8">
             <div
-              className="w-60 h-11 p-px bg-black/70 border rounded-full border-black flex justify-center items-center"
+              className="w-60 h-11 p-px border-2 rounded-full border-black flex justify-center items-center"
               onClick={() => changeGamemode(gameModes.Single)}
             >
               <button className="w-60 h-10 bg-black/70 rounded-full inner-border active:border-yellow-200">
@@ -34,7 +34,7 @@ export default function Menu({
               </button>
             </div>
             <div
-              className="w-60 h-11 p-px bg-black/70 border rounded-full border-black flex justify-center items-center"
+              className="w-60 h-11 p-px border-2 rounded-full border-black flex justify-center items-center"
               onClick={() => changeGamemode(gameModes.Team)}
             >
               <button className="w-60 h-10 bg-black/70 rounded-full inner-border active:border-yellow-200">
@@ -42,7 +42,7 @@ export default function Menu({
               </button>
             </div>
             <div
-              className="w-60 h-11 p-px bg-black/70 border rounded-full border-black flex justify-center items-center"
+              className="w-60 h-11 p-px border-2 rounded-full border-black flex justify-center items-center"
               onClick={() => changeGamemode(gameModes.CostlessTeam)}
             >
               <button className="w-60 h-10 bg-black/70  rounded-full inner-border active:border-yellow-200">

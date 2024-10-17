@@ -64,7 +64,7 @@ CharacterInfoProps) {
       </audio>
 
       <div
-        className="w-60 h-11 p-px bg-black/70 border rounded-full border-black flex justify-center items-center mt-6 mb-4 ms-auto mr-auto"
+        className="w-60 h-11 p-px border-2 rounded-full border-black flex justify-center items-center mt-6 mb-4 ms-auto mr-auto"
         onClick={getCharacters}
       >
         <button className="w-60 h-10 bg-black/70 rounded-full inner-border active:border-yellow-200">
@@ -103,12 +103,12 @@ CharacterInfoProps) {
           key={character.id}
           className="flex justify-center items-center m-2 ml-5"
         >
-          <div className="w-16 h-16 p-px bg-black/70 border rounded-md border-black flex justify-center items-center">
+          <div className="w-16 h-17 border border rounded-md border-black flex justify-center items-center">
             <Image
               className="w-16 h-16 object-cover inner-border rounded-md"
               src={`/${character.img}.png`}
-              width={150}
-              height={150}
+              width={200}
+              height={200}
               alt="img"
               priority
             />
