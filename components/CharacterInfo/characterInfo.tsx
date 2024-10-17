@@ -27,6 +27,7 @@ CharacterInfoProps) {
   const [members, setMembers] = useState<number>(5);
 
   const audioRef = useRef<HTMLAudioElement>(null);
+  const audioMembRef = useRef<HTMLAudioElement>(null);
 
   const getCharacters = () => {
     audioRef.current?.play();
@@ -47,13 +48,13 @@ CharacterInfoProps) {
 
   const subtractMembers = () => {
     if (members === MIN_MEMBERS) return;
-
+    audioMembRef.current?.play();
     return setMembers((members) => members - 1);
   };
 
   const addMembers = () => {
     if (members === MAX_MEMBERS) return;
-
+    audioMembRef.current?.play();
     return setMembers((members) => members + 1);
   };
 
@@ -62,7 +63,9 @@ CharacterInfoProps) {
       <audio ref={audioRef}>
         <source src="/generate.mp3" type="audio/mpeg" />
       </audio>
-
+      <audio ref={audioMembRef}>
+        <source src="/memb.mp3" type="audio/mpeg" />
+      </audio>
       <div
         className="w-60 h-11 p-px border-2 rounded-full border-black flex justify-center items-center mt-6 mb-4 ms-auto mr-auto"
         onClick={getCharacters}
@@ -83,7 +86,7 @@ CharacterInfoProps) {
                 onClick={subtractMembers}
               />
             </div>
-            <div className="w-1/3 flex justify-center items-center">
+            <div className="w-1/3 flex justify-center items-center text-xs">
               {members}
             </div>
             <div className="w-1/3 flex justify-end items-center me-2">
