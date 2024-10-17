@@ -1,89 +1,46 @@
 "use client";
 
-import { gameModes } from "@/utils/data/gamemodesEnum";
-import { SparkingDataElement } from "@/utils/data/types";
-import {
-  getCostlessRandomTeam,
-  getRandomCharacter,
-  getRandomTeam,
-} from "@/utils/getDataMethods";
+import Menu from "@/components/Menu/menu";
+import { gameModes } from "@/_utils/data/gamemodesEnum";
+import { SparkingDataElement } from "@/_utils/data/types";
+
 import Image from "next/image";
-import { ChangeEvent, useRef, useState } from "react";
+import { useState } from "react";
+import CharacterInfo from "@/components/CharacterInfo/characterInfo";
 
 export default function Home() {
   const [gameMode, setGameMode] = useState<number>(gameModes.Single);
   const [characters, setCharacters] = useState<SparkingDataElement[]>([]);
-  const membersRef = useRef<HTMLSelectElement>(null);
-
-  const getCharacter = () => {
-    switch (gameMode) {
-      case 0:
-        setCharacters(getRandomCharacter());
-        break;
-      case 1:
-        setCharacters(getRandomTeam(15));
-        break;
-      case 2:
-        setCharacters(
-          getCostlessRandomTeam(Number(membersRef.current?.value) || 5)
-        );
-        break;
-      default:
-        break;
-    }
-  };
-
-  const changeGamemode = (event: ChangeEvent<HTMLSelectElement>) => {
-    setGameMode(Number(event.target.value));
-  };
+  const [showCharactersInfo, setShowCharactersInfo] = useState<boolean>(false);
+  const [banlist, setBanlist] = useState<number[]>([]);
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <div className="flex justify-center items-center gap-4">
-        <button onClick={getCharacter} className="outline bg-white text-black">
-          Roll Characters
-        </button>
-        <select
-          name="gamemode"
-          className="text-black"
-          defaultValue={gameModes.Single}
-          onChange={changeGamemode}
-        >
-          <option value={gameModes.Single}> Singolo </option>
-          <option value={gameModes.Team}>Team PD</option>
-          <option value={gameModes.CostlessTeam}>Team senza PD</option>
-        </select>
-        {gameMode === gameModes.CostlessTeam && (
-          <select
-            name="members"
-            className="text-black"
-            defaultValue={5}
-            ref={membersRef}
-          >
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-          </select>
-        )}
+    <div className="flex flex-col items-center h-screen">
+      <div className="flex flex-col items-center justify-center h-1/6">
+        <Image
+          src="/logo.png"
+          width={250}
+          height={250}
+          priority
+          alt="logo"
+          className="mt-12"
+          onClick={() => setShowCharactersInfo(false)}
+        />
       </div>
-
-      <div className="flex justify-items-center items-center">
-        {characters.map((character) => (
-          <div key={character.id} className="m-4">
-            <Image
-              className="w-48 h-48 object-cover"
-              src={`/${character.img}.png`}
-              width={300}
-              height={300}
-              alt="img"
-              priority
-            />
-            <div className="text-center">{character.name}</div>
-          </div>
-        ))}
-      </div>
+      {showCharactersInfo ? (
+        <CharacterInfo
+          characters={characters}
+          setCharacters={setCharacters}
+          gameMode={gameMode}
+          banlist={banlist}
+        />
+      ) : (
+        <Menu
+          setGameMode={setGameMode}
+          setShowCharactersInfo={setShowCharactersInfo}
+          setBanlist={setBanlist}
+        />
+      )}
     </div>
   );
 }
