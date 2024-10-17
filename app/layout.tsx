@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Inter } from "next/font/google";
 
 const braziliaSeven = localFont({
   src: "./fonts/BrasiliaRegular.otf",
   variable: "--font-brasilia-regular",
   weight: "100 900",
+});
+
+const interFont = Inter({
+  variable: "--font-inter",
+  weight: ["400", "700"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -20,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${braziliaSeven.variable} antialiased font-[family-name:var(--font-brasilia-regular)]`}
+        className={`${braziliaSeven.variable} ${interFont.variable} antialiased font-[family-name:var(--font-brasilia-regular)]`}
       >
         {children}
       </body>

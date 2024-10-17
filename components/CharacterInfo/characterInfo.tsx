@@ -6,7 +6,7 @@ import {
   getRandomTeam,
 } from "@/_utils/getDataMethods";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 interface CharacterInfoProps {
   characters: SparkingDataElement[];
@@ -26,7 +26,10 @@ export default function CharacterInfo({
 CharacterInfoProps) {
   const [members, setMembers] = useState<number>(5);
 
+  const audioRef = useRef<HTMLAudioElement>(null);
+
   const getCharacters = () => {
+    audioRef.current?.play();
     switch (gameMode) {
       case 0:
         setCharacters(getRandomCharacter());
@@ -56,11 +59,15 @@ CharacterInfoProps) {
 
   return (
     <div className="flex flex-col items-start">
+      <audio ref={audioRef}>
+        <source src="/generate.mp3" type="audio/mpeg" />
+      </audio>
+
       <div
         className="w-60 h-11 p-px bg-black/70 border rounded-full border-black flex justify-center items-center mt-6 mb-4 ms-auto mr-auto"
         onClick={getCharacters}
       >
-        <button className="w-60 h-10 bg-black/70 border-2 rounded-full border-slate-600 active:bg-orange-500 active:border-yellow-200">
+        <button className="w-60 h-10 bg-black/70 rounded-full inner-border active:border-yellow-200">
           GENERA
         </button>
       </div>
@@ -96,7 +103,7 @@ CharacterInfoProps) {
           key={character.id}
           className="flex justify-center items-center m-2 ml-5"
         >
-          <div className="w-16 h-16 p-px bg-black/70 border rounded-full border-black flex justify-center items-center">
+          <div className="w-16 h-16 p-px bg-black/70 border rounded-md border-black flex justify-center items-center">
             <Image
               className="w-16 h-16 object-cover inner-border rounded-md"
               src={`/${character.img}.png`}
@@ -107,9 +114,13 @@ CharacterInfoProps) {
             />
           </div>
           <div className="flex flex-col justify-center items-start ml-3">
-            <div className="text-center">{character.name}</div>
+            <div className="text-center capitalize font-[family-name:var(--font-inter)] font-bold">
+              {character.name}
+            </div>
             {gameMode === gameModes.Team && (
-              <div className="text-center">{character.cost}pd</div>
+              <div className="text-center capitalize font-[family-name:var(--font-inter)] font-normal">
+                {character.cost}pd
+              </div>
             )}
           </div>
         </div>

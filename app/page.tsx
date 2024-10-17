@@ -5,7 +5,7 @@ import { gameModes } from "@/_utils/data/gamemodesEnum";
 import { SparkingDataElement } from "@/_utils/data/types";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CharacterInfo from "@/components/CharacterInfo/characterInfo";
 import "./globals.css";
 
@@ -20,8 +20,13 @@ export default function Home() {
     setCharacters([]);
   };
 
+  const audioRef = useRef<HTMLAudioElement>(null);
+
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen md:items-center">
+      <audio ref={audioRef}>
+        <source src="/menu.mp3" type="audio/mpeg" />
+      </audio>
       <div className="flex flex-col items-center justify-center h-1/6">
         <Image
           src="/logo.png"
@@ -45,6 +50,7 @@ export default function Home() {
           setGameMode={setGameMode}
           setShowCharactersInfo={setShowCharactersInfo}
           setBanlist={setBanlist}
+          audioRef={audioRef}
         />
       )}
     </div>
