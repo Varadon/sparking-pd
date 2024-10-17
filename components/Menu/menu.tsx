@@ -11,7 +11,6 @@ export default function Menu({
   setGameMode,
   setShowCharactersInfo,
 }: MenuProps) {
-  
   const changeGamemode = (gamemode: number) => {
     setGameMode(gamemode);
     setShowCharactersInfo(true);
@@ -26,7 +25,7 @@ export default function Menu({
               className="w-60 h-11 p-px bg-black/70 border rounded-full border-black flex justify-center items-center"
               onClick={() => changeGamemode(gameModes.Single)}
             >
-              <button className="w-60 h-10 bg-black/70 border-2 rounded-full border-slate-600 active:bg-orange-500 active:border-yellow-200">
+              <button className="w-60 h-10 bg-black/70 rounded-full inner-border active:bg-orange-500 active:border-yellow-200">
                 SINGOLO
               </button>
             </div>
@@ -34,7 +33,7 @@ export default function Menu({
               className="w-60 h-11 p-px bg-black/70 border rounded-full border-black flex justify-center items-center"
               onClick={() => changeGamemode(gameModes.Team)}
             >
-              <button className="w-60 h-10 bg-black/70 border-2 rounded-full border-slate-600 active:bg-orange-500 active:border-yellow-200">
+              <button className="w-60 h-10 bg-black/70 rounded-full inner-border active:bg-orange-500 active:border-yellow-200">
                 TEAM (PD)
               </button>
             </div>
@@ -42,7 +41,7 @@ export default function Menu({
               className="w-60 h-11 p-px bg-black/70 border rounded-full border-black flex justify-center items-center"
               onClick={() => changeGamemode(gameModes.CostlessTeam)}
             >
-              <button className="w-60 h-10 bg-black/70 border-2 rounded-full border-slate-600 active:bg-orange-500 active:border-yellow-200">
+              <button className="w-60 h-10 bg-black/70  rounded-full inner-border active:bg-orange-500 active:border-yellow-200">
                 TEAM
               </button>
             </div>

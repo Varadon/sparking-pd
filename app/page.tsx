@@ -7,6 +7,7 @@ import { SparkingDataElement } from "@/_utils/data/types";
 import Image from "next/image";
 import { useState } from "react";
 import CharacterInfo from "@/components/CharacterInfo/characterInfo";
+import "./globals.css";
 
 export default function Home() {
   const [gameMode, setGameMode] = useState<number>(gameModes.Single);
@@ -14,8 +15,13 @@ export default function Home() {
   const [showCharactersInfo, setShowCharactersInfo] = useState<boolean>(false);
   const [banlist, setBanlist] = useState<number[]>([]);
 
+  const goToMenu = () => {
+    setShowCharactersInfo(false);
+    setCharacters([]);
+  };
+
   return (
-    <div className="flex flex-col items-center h-screen">
+    <div className="flex flex-col h-screen">
       <div className="flex flex-col items-center justify-center h-1/6">
         <Image
           src="/logo.png"
@@ -24,7 +30,7 @@ export default function Home() {
           priority
           alt="logo"
           className="mt-12"
-          onClick={() => setShowCharactersInfo(false)}
+          onClick={goToMenu}
         />
       </div>
       {showCharactersInfo ? (
