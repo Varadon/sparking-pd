@@ -31,3 +31,24 @@ body {
 button.inner-border:active {
   background: rgb(249, 115, 22);
 }
+
+.open-animation {
+  animation-name: open-animation;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.close-animation {
+  animation-name: open-animation;
+  animation-duration: 0.5s;
+  animation-fill-mode: backwards;
+}
+
+@keyframes open-animation {
+  0% {
+    top: 100%;
+  }
+  100% {
+    top: 20%;
+  }
+}

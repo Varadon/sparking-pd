@@ -14,20 +14,28 @@ export default function Home() {
   const [characters, setCharacters] = useState<SparkingDataElement[]>([]);
   const [showCharactersInfo, setShowCharactersInfo] = useState<boolean>(false);
   const [banlist, setBanlist] = useState<number[]>([]);
+  const [showBanlist, setShowBanlist] = useState<boolean>(false);
 
   const goToMenu = () => {
     setShowCharactersInfo(false);
+    setShowBanlist(false);
     setCharacters([]);
   };
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
   return (
-    <div className="flex flex-col h-screen md:items-center">
+    <div
+      className={`flex flex-col h-screen md:items-center relative overflow-hidden`}
+    >
       <audio ref={audioRef}>
         <source src="/menu.mp3" type="audio/mpeg" />
       </audio>
-      <div className="flex flex-col items-center justify-center h-1/6">
+      <div
+        className={`flex flex-col items-center justify-center h-1/6 ${
+          showBanlist ? "blur" : ""
+        }`}
+      >
         <Image
           src="/logo.png"
           width={250}
@@ -50,7 +58,10 @@ export default function Home() {
           setGameMode={setGameMode}
           setShowCharactersInfo={setShowCharactersInfo}
           setBanlist={setBanlist}
+          banlist={banlist}
           audioRef={audioRef}
+          showBanlist={showBanlist}
+          setShowBanlist={setShowBanlist}
         />
       )}
     </div>

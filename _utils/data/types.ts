@@ -3,4 +3,5 @@ export interface SparkingDataElement {
   name: string;
   img: string;
   cost: number;
+  transformFrom?: number;
 }

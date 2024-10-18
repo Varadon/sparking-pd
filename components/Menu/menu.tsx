@@ -1,11 +1,16 @@
 import { gameModes } from "@/_utils/data/gamemodesEnum";
 import Image from "next/image";
 import { RefObject } from "react";
+import Banlist from "../Banlist/banlist";
 
 interface MenuProps {
   setGameMode: (gameMode: number) => void;
   setShowCharactersInfo: (value: boolean) => void;
   setBanlist: (values: number[]) => void;
+  banlist: number[];
+  showBanlist: boolean;
+  setShowBanlist: (showBanlist: boolean) => void;
+
   audioRef: RefObject<HTMLAudioElement>;
 }
 
@@ -13,6 +18,10 @@ export default function Menu({
   setGameMode,
   setShowCharactersInfo,
   audioRef,
+  setBanlist,
+  banlist,
+  showBanlist,
+  setShowBanlist,
 }: MenuProps) {
   const changeGamemode = (gamemode: number) => {
     audioRef.current?.play();
@@ -22,7 +31,11 @@ export default function Menu({
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center h-4/6">
+      <div
+        className={`flex flex-col justify-center items-center h-4/6 ${
+          showBanlist ? "blur" : ""
+        }`}
+      >
         <div className="flex justify-center items-center gap-4">
           <div className="flex flex-col gap-8">
             <div
@@ -52,8 +65,12 @@ export default function Menu({
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center h-1/6">
-        <button className="w-60 h-6 bg-black/50 flex items-center justify-center ">
+      <div
+        className={`flex flex-col justify-center items-center h-1/6 ${
+          showBanlist ? "blur" : ""
+        }`}
+      >
+        <button className="w-60 h-6 bg-black/50 flex items-center justify-center">
           BANLIST
         </button>
         <Image
@@ -63,8 +80,10 @@ export default function Menu({
           alt="arrow"
           className="mt-2"
           color="white"
+          onClick={() => setShowBanlist(true)}
         />
       </div>
+      {showBanlist && <Banlist banlist={banlist} setBanlist={setBanlist} />}
     </>
   );
 }
