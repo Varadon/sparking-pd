@@ -22,8 +22,8 @@ export default function CharacterInfo({
   characters,
   setCharacters,
   gameMode,
-}: // banlist,
-CharacterInfoProps) {
+  banlist,
+}: CharacterInfoProps) {
   const [members, setMembers] = useState<number>(5);
 
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -33,13 +33,13 @@ CharacterInfoProps) {
     audioRef.current?.play();
     switch (gameMode) {
       case 0:
-        setCharacters(getRandomCharacter());
+        setCharacters(getRandomCharacter(banlist));
         break;
       case 1:
-        setCharacters(getRandomTeam(15));
+        setCharacters(getRandomTeam(15, banlist));
         break;
       case 2:
-        setCharacters(getCostlessRandomTeam(members));
+        setCharacters(getCostlessRandomTeam(members, banlist));
         break;
       default:
         break;
